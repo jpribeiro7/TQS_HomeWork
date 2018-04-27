@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html >
+    <head>
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    url: 'http://localhost:8080/all',
+                    crossDomain: true
+                }).then(function (data) {
+                    
+                    var items = data.currencyList;
+                    
+                    
+                    for(var i = 0; i<items.length; i++){
+                        $('#select_one').append('<option value='+items[i].split(' - ')[0]+'>'+items[i]+'</option>');
+                        $('#select_two').append('<option value='+items[i].split(' - ')[0]+'>'+items[i]+'</option>');
+                    }
+                });
+            });
+            $(document).ready(function(){
+                $("div").change(function(){
+                    $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    data: null,
+                    url: 'http://localhost:8080/conversion?source='+$('#select_one').val()+'&to='+$('#select_two').val()+'&amount='+$('#amount').val(),
+                    crossDomain: true,
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert('The api has no data available')
+                    }
+                }).then(function (data) {
+                    
+                    $('#result').text('The converted value is '+data)
+                });
+                })
+            })
+        </script>
+        
+    </head>
+    <body>
+        <div id="myDiv">
+            <input id="amount" value="1" type="number">&nbsp&nbsp
+            <select id="select_one">
+                
+            </select>&nbsp
+            To&nbsp
+            <select id="select_two">
+                
+            </select>
+        </div>
+        <div>
+            <h3 id="result">The converted value is </h3>
+        </div>
+    </body>
+</html>

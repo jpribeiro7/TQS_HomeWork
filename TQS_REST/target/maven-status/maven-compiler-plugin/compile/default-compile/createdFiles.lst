@@ -1,0 +1,7 @@
+network\ListCurrency.class
+service\CurrencyService.class
+model\Currency.class
+network\CurrencyQuotes.class
+controller\CurrencyController.class
+launch\Application.class
+model\CurrencyList.class

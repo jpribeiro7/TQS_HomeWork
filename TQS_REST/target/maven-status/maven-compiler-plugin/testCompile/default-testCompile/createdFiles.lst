@@ -1,0 +1,4 @@
+service\MockCurrencyServiceTest$CurrencyServiceTestContextConfiguration.class
+service\SeleniumTest.class
+service\UnitCurrencyServiceTest.class
+service\MockCurrencyServiceTest.class
